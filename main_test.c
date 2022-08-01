@@ -2,5 +2,5 @@
 
 void main_test(void)
 {
-    printf("main_test.\n");
+    printf("main_test2\n");
 }
