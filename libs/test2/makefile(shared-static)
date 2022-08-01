@@ -1,0 +1,25 @@
+# shared include static
+srcs := $(wildcard ./source/*.c)
+
+objs := $(srcs:%.c=%.o)
+
+cflags := -I../include
+cflags += -fPIC
+
+libs := ../static/libtestmath.a
+
+target := ./shared/libmainmath.so
+
+.PHONY : clean all
+
+all: $(target)
+
+$(target): $(objs)
+	ar x $(libs)
+	cc -shared -o $@ $^ *.o
+
+$(objs):%.o:%.c
+	cc -o $@ -c $< $(cflags)
+
+clean:
+	-rm -f $(objs) $(target) *.o

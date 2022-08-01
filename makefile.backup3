@@ -1,0 +1,24 @@
+objs := *.o
+DIRSRC := source
+DIRINC := include
+SRCS += \
+	${DIRSRC}/command.c \
+	${DIRSRC}/display.c \
+	${DIRSRC}/kbd.c \
+	${DIRSRC}/utils.c \
+	${DIRSRC}/main.c
+
+TARGET := edit
+
+CFLAG := -I${DIRINC}
+
+all: ${objs}
+	cc -o ${TARGET} ${objs}
+
+${objs}: 
+	cc -c ${SRCS} ${CFLAG}
+	@echo $(objs)
+
+.PHONY: clean all
+clean:
+	rm ${TARGET} *.o

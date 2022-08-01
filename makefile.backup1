@@ -1,0 +1,26 @@
+# 显示指定头文件和源文件
+objs := main.o kbd.o command.o display.o utils.o
+dir_srcs := source
+dir_inc := include
+CFLAG := -Iinclude
+
+edit: ${objs}
+	cc -o edit ${objs}
+
+main.o: ${dir_srcs}/main.c ${dir_inc}/command.h ${dir_inc}/defs.h ${dir_inc}/display.h 
+	cc -c ${dir_srcs}/main.c ${CFLAG}
+
+kbd.o: ${dir_srcs}/kbd.c ${dir_inc}/kbd.h ${dir_inc}/command.h ${dir_inc}/defs.h
+	cc -c ${dir_srcs}/kbd.c ${CFLAG}
+
+command.o: ${dir_srcs}/command.c ${dir_inc}/command.h
+	cc -c ${dir_srcs}/command.c ${CFLAG}
+
+display.o: ${dir_srcs}/display.c ${dir_inc}/defs.h
+	cc -c ${dir_srcs}/display.c ${CFLAG}
+	
+utils.o: ${dir_srcs}/utils.c ${dir_inc}/defs.h
+	cc -c ${dir_srcs}/utils.c ${CFLAG}
+
+clean:
+	rm edit ${objs}

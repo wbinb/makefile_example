@@ -1,0 +1,23 @@
+# static include shared
+srcs := $(wildcard ./source/*.c)
+
+objs := $(srcs:%.c=%.o)
+
+cflags := -I../include
+cflags += -DLINK_SO
+libs := -ldl
+
+target := ./static/libmainmath2.a
+
+.PHONY : clean all
+
+all: $(target)
+
+$(target): $(objs)
+	ar -cr $@ $^
+
+$(objs):%.o:%.c
+	cc -o $@ -c $< $(cflags) $(libs)
+
+clean:
+	-rm -f $(objs) $(target) *.o

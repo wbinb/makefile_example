@@ -1,0 +1,26 @@
+# 隐式去掉头文件
+objs := main.o kbd.o command.o display.o utils.o
+dir_srcs := source
+dir_inc := include
+CFLAG := -Iinclude
+
+edit: ${objs}
+	cc -o edit ${objs}
+
+main.o: ${dir_srcs}/main.c
+	cc -c ${dir_srcs}/main.c ${CFLAG}
+
+kbd.o: ${dir_srcs}/kbd.c
+	cc -c ${dir_srcs}/kbd.c ${CFLAG}
+
+command.o: ${dir_srcs}/command.c
+	cc -c ${dir_srcs}/command.c ${CFLAG}
+
+display.o: ${dir_srcs}/display.c
+	cc -c ${dir_srcs}/display.c ${CFLAG}
+	
+utils.o: ${dir_srcs}/utils.c
+	cc -c ${dir_srcs}/utils.c ${CFLAG}
+
+clean:
+	rm edit ${objs}

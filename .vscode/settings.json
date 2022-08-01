@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "defs.h": "c",
+        "command.h": "c",
+        "display.h": "c",
+        "buffer.h": "c",
+        "kbd.h": "c",
+        "math_add.h": "c",
+        "mainlib.h": "c"
+    }
+}

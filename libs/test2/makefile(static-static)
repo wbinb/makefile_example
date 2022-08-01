@@ -1,0 +1,23 @@
+## static include static
+srcs := $(wildcard ./source/*.c)
+
+objs := $(srcs:%.c=%.o)
+
+cflags := -I../include
+libs := ../static/libtestmath.a
+
+target := ./static/libmainmath.a
+
+.PHONY : clean all
+
+all: $(target)
+
+$(target): $(objs)
+	ar x $(libs)
+	ar -cr $@ $^ *.o
+
+$(objs):%.o:%.c
+	cc -c $< $(cflags) -o $@
+
+clean:
+	-rm -f $(objs) $(target) *.o

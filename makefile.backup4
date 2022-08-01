@@ -1,0 +1,19 @@
+# 在Makefile规则中，通配符会被自动展开。但在变量的定义和函数引用时，通配符将失效。
+# 这种情况下如果需要通配符有效，就需要使用函数“wildcard”，
+# 它的用法是：$(wildcard PATTERN...) 。在Makefile中，它被展开为已经存在的、使用空格分开的、匹配此模式的所有文件列表
+srcs := $(wildcard *.c ./source/*.c)
+objs := *.o
+TARGET := edit
+
+CFLAG := -Iinclude
+
+all: ${objs}
+	cc -o ${TARGET} ${objs} 
+
+${objs}: 
+	@echo ${srcs}
+	cc -c ${srcs} ${CFLAG}
+
+.PHONY: clean all
+clean:
+	rm ${TARGET} *.o
